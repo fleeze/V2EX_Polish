@@ -13,20 +13,10 @@ void (async () => {
   const storage = await getStorage()
   const options = storage[StorageKey.Options]
 
-  handlingLayout()
+  // handlingLayout()
 
-  if (options.openInNewTab) {
-    $topicHeader.find('a[href^="/member/"]').prop('target', '_blank')
 
-    // 支持新页签打开用户主页链接。
-    $commentTableRows.find('> td:nth-child(3) > strong > a').prop('target', '_blank')
-  }
-
-  if (options.hideAccount) {
-    $infoCard.find('a[href^="/member/"]').css('opacity', '0')
-  }
-
-  handlingTools()
+  // handlingTools()
 
   // 按 Esc 隐藏回复框。
   {
@@ -46,22 +36,9 @@ void (async () => {
     })
   }
 
-  handlingContent()
+  // handlingContent()
 
-  // 如果是从相同的主题跳转过来的，且含有分页参数，则被认为是执行翻页操作，跳过正文内容直接滚动到评论区。
-  if (document.referrer !== '') {
-    if (document.referrer.includes(document.location.pathname)) {
-      const url = new URL(document.location.href)
-      const page = url.searchParams.get('p')
-      if (page && page !== '1') {
-        document.querySelector('.topic_buttons')?.scrollIntoView({ behavior: 'smooth' })
-      }
-    }
-  }
 
-  handlingPaging()
   await handlingComments()
-  handleReply()
 
-  loadIcons()
 })()
